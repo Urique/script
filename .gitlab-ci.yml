@@ -1,0 +1,70 @@
+image: ubuntu:17.04
+
+stages:
+    - package
+
+package:
+    stage: package
+    tags:
+        - docker
+    script:
+        - apt-get update -qq && apt-get install -y -qq curl git p7zip-full build-essential gcc-mingw-w64-x86-64 gcc-mingw-w64-i686
+        
+        - mkdir bin
+        - cd bin
+        - git clone https://github.com/rmyorston/busybox-w32.git
+        - cp -r busybox-w32 busybox-w64
+
+        - cd busybox-w32
+        - make mingw32_defconfig
+        - make -j4
+
+        - cd ../busybox-w64
+        - make mingw64_defconfig
+        - make -j4
+
+        - cd ..
+        - mkdir x64
+
+        - cp busybox-w32/busybox.exe .
+        - cp busybox-w64/busybox.exe x64
+
+        - rm -rf busybox-w32
+        - rm -rf busybox-w64
+
+        - curl -o curl32.zip https://dl.uxnr.de/build/curl/curl_winssl_msys2_mingw32_stc/curl-7.53.1/curl-7.53.1.zip
+        - curl -o curl64.zip https://dl.uxnr.de/build/curl/curl_winssl_msys2_mingw64_stc/curl-7.53.1/curl-7.53.1.zip
+
+        - 7za e curl32.zip "src/curl.exe"
+        - 7za e -ox64 curl64.zip "src/curl.exe"
+        
+        - rm curl32.zip
+        - rm curl64.zip
+
+        - cd ..
+        - rm .gitlab-ci.yml
+        - rm -rf .git
+
+        - sed -i 's/$/\r/' techbench.cmd
+        - sed -i 's/$/\r/' techbench_md.cmd
+
+        - mkdir .build
+        - mv * .build
+        - cd .build
+
+        - touch *
+        - touch bin/*
+        - touch bin/x64/*
+
+        - 7z a -mx=9 -r ../tbdump.7z
+        - cd ..
+        - sha256sum tbdump.7z > tbdump.7z.sha256
+        - sha1sum tbdump.7z > tbdump.7z.sha1
+        - md5sum tbdump.7z > tbdump.7z.md5
+
+    artifacts:
+        paths:
+            - tbdump.7z
+            - tbdump.7z.sha256
+            - tbdump.7z.sha1
+            - tbdump.7z.md5

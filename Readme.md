@@ -45,4 +45,4 @@ Credits
 -------
 WzorNET - finding out that TechBench contains more than Windows 10.<br>
 Ron Yorston - BusyBox port for Windows. https://frippery.org/busybox/<br>
-Stefan Kanthak - cUrl binaries for Windows. https://skanthak.homepage.t-online.de/curl.html
+Marc Hörsken - curl binaries for Windows. https://dl.uxnr.de/build/curl/<br>
