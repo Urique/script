@@ -39,7 +39,7 @@ TechBench dump website
 --------------
 Website: https://mdl-tb.ct8.pl/<br>
 Markdown: https://mdl-tb.ct8.pl/dump.md<br>
-GitHub: https://github.com/mkuba50/techbench-dump-web
+GitHub: https://github.com/techbench-dump/website
 
 Credits
 -------
