@@ -35,8 +35,12 @@ Example command to create HTML file with products from range between 242 and 247
 ./tbdump.sh html 242 247
 ```
 
+Test packages [![build status](https://gitlab.com/techbench-dump/script/badges/master/build.svg)](https://gitlab.com/techbench-dump/script/commits/master)
+-------------
+If you want to test newest version of script you can download test package from [GitLab](https://gitlab.com/techbench-dump/script/builds/artifacts/master/browse?job=package).
+
 TechBench dump website
---------------
+----------------------
 Website: https://mdl-tb.ct8.pl/<br>
 Markdown: https://mdl-tb.ct8.pl/dump.md<br>
 GitHub: https://github.com/techbench-dump/website
