@@ -17,7 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 minProdID=1
-maxProdID=350
+maxProdID=400
 
 legacyGen=0
 
